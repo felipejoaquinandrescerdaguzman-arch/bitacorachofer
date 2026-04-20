@@ -20,187 +20,141 @@ HTML_CHOFER = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Rutas - Logistic F.C.</title>
+    <title>Mis Rutas - Logistic FC</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-200">
+<body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-zinc-200">
 
-    <div class="max-w-md mx-auto min-h-screen pb-8">
+    <div class="max-w-md mx-auto min-h-screen pb-12">
         <!-- Header / Navbar -->
-        <header class="bg-gradient-to-r from-blue-700 to-blue-900 text-white p-5 text-center sticky top-0 shadow-[0_4px_20px_-5px_rgba(0,0,0,0.3)] rounded-b-2xl z-20 relative border-b border-blue-900/50">
-            <h1 class="text-2xl font-extrabold tracking-tight">🚛 Mis Rutas</h1>
-            <p class="text-sm text-blue-100 mt-1 font-medium opacity-90 tracking-wide">Logistic F.C. • En Ruta</p>
+        <header class="bg-white px-6 py-8 border-b border-zinc-100 sticky top-0 z-20">
+            <p class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1">Logística en Tiempo Real</p>
+            <h1 class="text-2xl font-bold tracking-tight text-zinc-900">Mis Rutas</h1>
         </header>
 
-        <main class="px-4 pt-6">
+        <main class="px-6 py-8">
             {% if rutas %}
-            <div class="space-y-6">
+            <div class="space-y-10">
                 {% for ruta in rutas %}
                 
                 {% set estado = ruta.estado %}
                 {% if estado == 'Pendiente' %}
-                    {% set btn_color = 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500' %}
-                    {% set btn_text = 'INICIAR RUTA' %}
-                    {% set w = '0%' %}{% set bd_col = 'border-blue-600' %}
-                    {% set badge_col = 'bg-blue-100 text-blue-800' %}
-                    {% set c = ['bg-blue-600 text-white', 'bg-slate-200 text-slate-400', 'bg-slate-200 text-slate-400', 'bg-slate-200 text-slate-400'] %}
+                    {% set btn_text = 'Iniciar Ruta' %}
+                    {% set w = '0%' %}
+                    {% set c = ['bg-zinc-900 ring-4 ring-zinc-50 scale-125 z-10', 'bg-zinc-200', 'bg-zinc-200', 'bg-zinc-200'] %}
                 {% elif estado == 'En Camino a Origen' %}
-                    {% set btn_color = 'bg-orange-500 hover:bg-orange-600 focus:ring-orange-500' %}
-                    {% set btn_text = 'LLEGUÉ AL ORIGEN' %}
-                    {% set w = '33%' %}{% set bd_col = 'border-orange-500' %}
-                    {% set badge_col = 'bg-orange-100 text-orange-800' %}
-                    {% set c = ['bg-orange-500 text-white', 'bg-orange-500 text-white', 'bg-slate-200 text-slate-400', 'bg-slate-200 text-slate-400'] %}
+                    {% set btn_text = 'Llegué al Origen' %}
+                    {% set w = '33%' %}
+                    {% set c = ['bg-zinc-400', 'bg-zinc-900 ring-4 ring-zinc-50 scale-125 z-10', 'bg-zinc-200', 'bg-zinc-200'] %}
                 {% elif estado == 'Cargando' %}
-                    {% set btn_color = 'bg-purple-600 hover:bg-purple-700 focus:ring-purple-500' %}
-                    {% set btn_text = 'CARGA LISTA, IR A DESTINO' %}
-                    {% set w = '66%' %}{% set bd_col = 'border-purple-600' %}
-                    {% set badge_col = 'bg-purple-100 text-purple-800' %}
-                    {% set c = ['bg-purple-600 text-white', 'bg-purple-600 text-white', 'bg-purple-600 text-white', 'bg-slate-200 text-slate-400'] %}
+                    {% set btn_text = 'Carga Lista, ir a Destino' %}
+                    {% set w = '66%' %}
+                    {% set c = ['bg-zinc-400', 'bg-zinc-400', 'bg-zinc-900 ring-4 ring-zinc-50 scale-125 z-10', 'bg-zinc-200'] %}
                 {% elif estado == 'En Camino a Destino' %}
-                    {% set btn_color = 'bg-emerald-500 hover:bg-emerald-600 focus:ring-emerald-500' %}
-                    {% set btn_text = 'FINALIZAR RUTA' %}
-                    {% set w = '100%' %}{% set bd_col = 'border-emerald-500' %}
-                    {% set badge_col = 'bg-emerald-100 text-emerald-800' %}
-                    {% set c = ['bg-emerald-500 text-white', 'bg-emerald-500 text-white', 'bg-emerald-500 text-white', 'bg-emerald-500 text-white'] %}
+                    {% set btn_text = 'Finalizar Ruta' %}
+                    {% set w = '100%' %}
+                    {% set c = ['bg-zinc-400', 'bg-zinc-400', 'bg-zinc-400', 'bg-zinc-900 ring-4 ring-zinc-50 scale-125 z-10'] %}
                 {% else %}
-                    {% set btn_color = 'bg-slate-500 hover:bg-slate-600 focus:ring-slate-500' %}
-                    {% set btn_text = 'ESTADO DESCONOCIDO' %}
-                    {% set w = '0%' %}{% set bd_col = 'border-slate-500' %}
-                    {% set badge_col = 'bg-slate-100 text-slate-800' %}
-                    {% set c = ['bg-slate-200 text-slate-400', 'bg-slate-200 text-slate-400', 'bg-slate-200 text-slate-400', 'bg-slate-200 text-slate-400'] %}
+                    {% set btn_text = 'Estado Desconocido' %}
+                    {% set w = '0%' %}
+                    {% set c = ['bg-zinc-200', 'bg-zinc-200', 'bg-zinc-200', 'bg-zinc-200'] %}
                 {% endif %}
 
-                <div id="ruta-{{ ruta.id }}" class="bg-white rounded-[1.25rem] shadow-sm hover:shadow-lg transition-all duration-300 p-5 relative border border-slate-100/80 mb-6 overflow-visible">
+                <div id="ruta-{{ ruta.id }}" class="bg-white rounded-[2rem] p-8 relative border border-zinc-200 transition-all duration-500 overflow-visible">
                     
-                    <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-3.5">
-                        <span id="badge-{{ ruta.id }}" class="text-[11px] font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest {{ badge_col }} transition-colors duration-300 shadow-sm">
+                    <div class="flex justify-between items-center mb-10">
+                        <span id="badge-{{ ruta.id }}" class="text-[10px] font-bold px-3 py-1 bg-zinc-50 text-zinc-600 rounded-full uppercase tracking-widest border border-zinc-200">
                             {{ estado }}
                         </span>
-                        <span class="text-slate-400 text-xs font-semibold flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            {{ ruta.fecha }}
-                        </span>
+                        <span class="text-zinc-400 text-[11px] font-medium tracking-wide">{{ ruta.fecha }}</span>
                     </div>
 
                     <!-- STEPPER TIEMPO REAL -->
-                    <div class="mx-2 mb-10 mt-2">
-                        <div class="relative flex justify-between">
-                            <!-- Lines -->
+                    <div class="mb-14 px-2">
+                        <div class="relative flex justify-between items-center h-2">
+                            <!-- Linea base -->
                             <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                                <div class="w-full border-t-[3px] border-slate-200/80"></div>
+                                <div class="w-full h-px bg-zinc-200"></div>
                             </div>
-                            <div id="line-prog-{{ ruta.id }}" class="absolute inset-0 flex items-center transition-all duration-500 ease-in-out" aria-hidden="true" style="width: {{ w }};">
-                                <div id="prog-bar-{{ ruta.id }}" class="w-full border-t-[3px] {{ bd_col }} transition-colors duration-500"></div>
+                            <!-- Linea activa -->
+                            <div id="line-prog-{{ ruta.id }}" class="absolute inset-y-0 left-0 flex items-center transition-all duration-700 ease-[cubic-bezier(0.2,0,0,1)]" aria-hidden="true" style="width: {{ w }};">
+                                <div class="w-full h-px bg-zinc-900"></div>
                             </div>
                             
-                            <!-- Nodes -->
-                            <div class="relative flex justify-center bg-white rounded-full">
-                                <div id="step-1-{{ ruta.id }}" class="w-8 h-8 rounded-full flex items-center justify-center border-[3px] border-white text-xs font-black transition-all duration-500 {{ c[0] }} shadow-sm">1</div>
-                                <span class="absolute -bottom-6 text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Inicio</span>
+                            <!-- Nodos -->
+                            <div class="relative flex justify-center bg-white px-2 items-center">
+                                <div id="step-1-{{ ruta.id }}" class="w-2.5 h-2.5 rounded-full transition-all duration-700 {{ c[0] }}"></div>
+                                <span class="absolute top-5 text-[9px] font-medium text-zinc-400 uppercase tracking-widest">Inicio</span>
                             </div>
-                            <div class="relative flex justify-center bg-white rounded-full">
-                                <div id="step-2-{{ ruta.id }}" class="w-8 h-8 rounded-full flex items-center justify-center border-[3px] border-white text-xs font-black transition-all duration-500 {{ c[1] }} shadow-sm">2</div>
-                                <span class="absolute -bottom-6 text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Origen</span>
+                            <div class="relative flex justify-center bg-white px-2 items-center">
+                                <div id="step-2-{{ ruta.id }}" class="w-2.5 h-2.5 rounded-full transition-all duration-700 {{ c[1] }}"></div>
+                                <span class="absolute top-5 text-[9px] font-medium text-zinc-400 uppercase tracking-widest">Origen</span>
                             </div>
-                            <div class="relative flex justify-center bg-white rounded-full">
-                                <div id="step-3-{{ ruta.id }}" class="w-8 h-8 rounded-full flex items-center justify-center border-[3px] border-white text-xs font-black transition-all duration-500 {{ c[2] }} shadow-sm">3</div>
-                                <span class="absolute -bottom-6 text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Carga</span>
+                            <div class="relative flex justify-center bg-white px-2 items-center">
+                                <div id="step-3-{{ ruta.id }}" class="w-2.5 h-2.5 rounded-full transition-all duration-700 {{ c[2] }}"></div>
+                                <span class="absolute top-5 text-[9px] font-medium text-zinc-400 uppercase tracking-widest">Carga</span>
                             </div>
-                            <div class="relative flex justify-center bg-white rounded-full">
-                                <div id="step-4-{{ ruta.id }}" class="w-8 h-8 rounded-full flex items-center justify-center border-[3px] border-white text-xs font-black transition-all duration-500 {{ c[3] }} shadow-sm">4</div>
-                                <span class="absolute -bottom-6 text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Destino</span>
+                            <div class="relative flex justify-center bg-white px-2 items-center">
+                                <div id="step-4-{{ ruta.id }}" class="w-2.5 h-2.5 rounded-full transition-all duration-700 {{ c[3] }}"></div>
+                                <span class="absolute top-5 text-[9px] font-medium text-zinc-400 uppercase tracking-widest">Destino</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mb-5 bg-gradient-to-r from-slate-50 to-white p-4 rounded-xl border border-slate-100 shadow-inner">
-                        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2 mb-2">
-                            <span class="text-xl">🧑‍✈️</span> {{ ruta.chofer }}
-                        </h2>
-                        <p class="text-sm font-semibold text-slate-600 flex items-center gap-2">
-                            <span class="text-base text-slate-400 opacity-80">🚚</span> <span>{{ ruta.vehiculo }}</span>
-                        </p>
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-zinc-50 rounded-full flex items-center justify-center text-lg border border-zinc-100">
+                            🧑‍✈️
+                        </div>
+                        <div>
+                            <h2 class="text-[15px] font-semibold text-zinc-900 tracking-tight leading-none mb-1.5">{{ ruta.chofer }}</h2>
+                            <p class="text-xs text-zinc-500 tracking-wide font-medium">Vehículo: {{ ruta.vehiculo }}</p>
+                        </div>
                     </div>
 
-                    <div class="space-y-4 mb-6 px-1">
-                        <div class="flex items-start gap-4">
-                            <div class="mt-0.5 text-blue-600 bg-blue-100/50 p-2 rounded-xl shadow-sm border border-blue-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Origen</p>
-                                <p class="text-[15px] text-slate-800 font-bold leading-tight">{{ ruta.origen }}</p>
-                            </div>
+                    <div class="flex flex-col mb-10 divide-y divide-zinc-100 border-t border-b border-zinc-100 py-1">
+                        <div class="flex flex-col py-4 gap-1.5">
+                            <p class="text-[10px] font-medium text-zinc-400 uppercase tracking-widest leading-none">Origen</p>
+                            <p class="text-sm text-zinc-900 font-medium tracking-wide leading-tight">{{ ruta.origen }}</p>
                         </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="mt-0.5 text-emerald-600 bg-emerald-100/50 p-2 rounded-xl shadow-sm border border-emerald-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>                                
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Destino</p>
-                                <p class="text-[15px] text-slate-800 font-bold leading-tight">{{ ruta.destino }}</p>
-                            </div>
+                        <div class="flex flex-col py-4 gap-1.5">
+                            <p class="text-[10px] font-medium text-zinc-400 uppercase tracking-widest leading-none">Destino</p>
+                            <p class="text-sm text-zinc-900 font-medium tracking-wide leading-tight">{{ ruta.destino }}</p>
                         </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="mt-0.5 text-indigo-600 bg-indigo-100/50 p-2 rounded-xl shadow-sm border border-indigo-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Centro de Costo</p>
-                                <p class="text-[15px] text-slate-800 font-bold leading-tight">{{ ruta.cc }}</p>
-                            </div>
+                        <div class="flex flex-col py-4 gap-1.5">
+                            <p class="text-[10px] font-medium text-zinc-400 uppercase tracking-widest leading-none">Centro de Costo</p>
+                            <p class="text-sm text-zinc-900 font-medium tracking-wide leading-tight">{{ ruta.cc }}</p>
                         </div>
                     </div>
 
                     {% if ruta.descripcion %}
-                    <div class="bg-gradient-to-br from-blue-50 to-blue-100/50 p-4 rounded-xl border border-blue-100/80 mb-6 relative overflow-hidden shadow-inner">
-                        <div class="absolute top-0 right-0 p-2 opacity-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-16 h-16 text-blue-900">
-                                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                        <div class="flex items-center gap-2 mb-2 relative z-10">
-                            <p class="text-[11px] font-black text-blue-700 uppercase tracking-widest">Detalle de la ruta</p>
-                        </div>
-                        <p class="text-sm text-slate-700 leading-relaxed font-semibold relative z-10">{{ ruta.descripcion }}</p>
+                    <div class="bg-zinc-50 rounded-2xl p-5 mb-10 border border-zinc-100/50">
+                        <p class="text-[10px] font-medium text-zinc-400 uppercase tracking-widest mb-2.5">Detalle</p>
+                        <p class="text-sm text-zinc-700 leading-relaxed font-medium">{{ ruta.descripcion }}</p>
                     </div>
                     {% endif %}
 
-                    <!-- BOTÓN DINÁMICO (Call To Action) -->
+                    <!-- BOTÓN DINÁMICO MINIMALISTA -->
                     <button id="btn-{{ ruta.id }}" type="button" onclick="avanzar({{ ruta.id }}, '{{ estado }}')"
-                        class="w-full {{ btn_color }} active:scale-95 active:shadow-inner transition-all duration-300 text-white font-black py-4 px-4 rounded-2xl shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-offset-2">
-                        <span class="tracking-wide text-lg uppercase">{{ btn_text }}</span>
+                        class="w-full bg-zinc-900 hover:bg-black active:scale-[0.98] transition-all duration-300 text-white font-medium py-4 px-6 rounded-full flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-zinc-100">
+                        <span class="tracking-wide text-sm">{{ btn_text }}</span>
                     </button>
                     
                 </div>
                 {% endfor %}
             </div>
             {% else %}
-            <!-- EMPTY STATE -->
-            <div class="flex flex-col items-center justify-center py-16 px-4 text-center h-[60vh]">
-                <div class="text-[5.5rem] mb-6 drop-shadow-xl animate-[bounce_3s_infinite]">🎉</div>
-                <h3 class="text-3xl font-black text-slate-800 mb-3 tracking-tight">¡Todo al día!</h3>
-                <p class="text-slate-500 font-medium text-[15px]">No tienes rutas asignadas en este momento.</p>
-                <div class="mt-10 p-5 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center gap-5 w-full">
-                    <span class="text-4xl bg-orange-50 p-3 rounded-2xl">☕</span>
-                    <p class="text-sm text-slate-600 font-bold text-left leading-relaxed">Es un excelente momento para estacionar y tomar un descanso.</p>
+            <!-- EMPTY STATE MINIMALISTA -->
+            <div class="flex flex-col items-center justify-center py-20 px-6 text-center h-[60vh]">
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 border border-zinc-200">
+                    <span class="text-2xl opacity-80 text-zinc-400">✓</span>
                 </div>
+                <h3 class="text-xl font-semibold text-zinc-900 mb-2 tracking-tight">Todo al día</h3>
+                <p class="text-zinc-500 font-medium text-sm leading-relaxed max-w-xs">No tienes rutas nuevas asignadas. Tómate un descanso y te notificaremos cuando haya algo nuevo.</p>
             </div>
             {% endif %}
         </main>
@@ -209,17 +163,17 @@ HTML_CHOFER = """
     <!-- SCRIPT DE ACTUALIZACIÓN ASÍNCRONA (TIEMPO REAL) -->
     <script>
         const conf = {
-            'Pendiente': { next: 'En Camino a Origen', btnText: 'LLEGUÉ AL ORIGEN', btnColor: 'bg-orange-500 hover:bg-orange-600 focus:ring-orange-500' },
-            'En Camino a Origen': { next: 'Cargando', btnText: 'CARGA LISTA, IR A DESTINO', btnColor: 'bg-purple-600 hover:bg-purple-700 focus:ring-purple-500' },
-            'Cargando': { next: 'En Camino a Destino', btnText: 'FINALIZAR RUTA', btnColor: 'bg-emerald-500 hover:bg-emerald-600 focus:ring-emerald-500' },
-            'En Camino a Destino': { next: 'Realizado', btnText: 'COMPLETADO', btnColor: 'bg-slate-500' }
+            'Pendiente': { next: 'En Camino a Origen', btnText: 'Llegué al Origen' },
+            'En Camino a Origen': { next: 'Cargando', btnText: 'Carga Lista, ir a Destino' },
+            'Cargando': { next: 'En Camino a Destino', btnText: 'Finalizar Ruta' },
+            'En Camino a Destino': { next: 'Realizado', btnText: 'Completado' }
         };
 
         const stateSteps = {
-            'Pendiente': { width: '0%', colors: ['bg-blue-600 text-white', 'bg-slate-200 text-slate-400', 'bg-slate-200 text-slate-400', 'bg-slate-200 text-slate-400'], barColor: 'border-blue-600', badgeColor: 'bg-blue-100 text-blue-800' },
-            'En Camino a Origen': { width: '33%', colors: ['bg-orange-500 text-white', 'bg-orange-500 text-white', 'bg-slate-200 text-slate-400', 'bg-slate-200 text-slate-400'], barColor: 'border-orange-500', badgeColor: 'bg-orange-100 text-orange-800' },
-            'Cargando': { width: '66%', colors: ['bg-purple-600 text-white', 'bg-purple-600 text-white', 'bg-purple-600 text-white', 'bg-slate-200 text-slate-400'], barColor: 'border-purple-600', badgeColor: 'bg-purple-100 text-purple-800' },
-            'En Camino a Destino': { width: '100%', colors: ['bg-emerald-500 text-white', 'bg-emerald-500 text-white', 'bg-emerald-500 text-white', 'bg-emerald-500 text-white'], barColor: 'border-emerald-500', badgeColor: 'bg-emerald-100 text-emerald-800' }
+            'Pendiente': { width: '0%', colors: ['bg-zinc-900 ring-4 ring-zinc-50 scale-125 z-10', 'bg-zinc-200', 'bg-zinc-200', 'bg-zinc-200'] },
+            'En Camino a Origen': { width: '33%', colors: ['bg-zinc-400', 'bg-zinc-900 ring-4 ring-zinc-50 scale-125 z-10', 'bg-zinc-200', 'bg-zinc-200'] },
+            'Cargando': { width: '66%', colors: ['bg-zinc-400', 'bg-zinc-400', 'bg-zinc-900 ring-4 ring-zinc-50 scale-125 z-10', 'bg-zinc-200'] },
+            'En Camino a Destino': { width: '100%', colors: ['bg-zinc-400', 'bg-zinc-400', 'bg-zinc-400', 'bg-zinc-900 ring-4 ring-zinc-50 scale-125 z-10'] }
         };
 
         function avanzar(idRuta, estadoActual) {
@@ -230,7 +184,7 @@ HTML_CHOFER = """
             // Estado visual de carga (Deshabilitar botón)
             const btn = document.getElementById('btn-' + idRuta);
             btn.disabled = true;
-            btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline max-w-fit align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-30" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg> <span class="tracking-wide text-lg uppercase font-black">ACTUALIZANDO...</span>`;
+            btn.innerHTML = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline align-middle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg> <span class="tracking-wide text-sm">Actualizando...</span>`;
             
             // Petición en segundo plano al servidor
             fetch(`/completar/${idRuta}/${encodeURIComponent(nuevoEstado)}`, { method: 'POST' })
@@ -238,50 +192,46 @@ HTML_CHOFER = """
             .then(data => {
                 if(data.success) {
                     if (nuevoEstado === 'Realizado') {
-                        // Animación elegante de salida y remoción
+                        // Animación muy limpia de salida
                         const card = document.getElementById('ruta-' + idRuta);
                         card.style.opacity = '0';
-                        card.style.transform = 'scale(0.9) translateY(20px)';
+                        card.style.transform = 'scale(0.98)';
                         setTimeout(() => {
                             card.remove();
-                            // Si ya no quedan rutas, refrescamos para ver la pantalla vacía
+                            // Si ya no quedan rutas, refrescamos para ver estado vacío
                             if (document.querySelectorAll('[id^=ruta-]').length === 0) {
                                 window.location.reload();
                             }
-                        }, 400);
+                        }, 500);
                     } else {
                         // 1. Actualizar Badge (Etiqueta superior)
                         const badge = document.getElementById('badge-' + idRuta);
                         badge.innerText = nuevoEstado.toUpperCase();
-                        badge.className = `text-[11px] font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest transition-colors duration-300 shadow-sm ${stateSteps[nuevoEstado].badgeColor}`;
                         
                         // 2. Actualizar Stepper (Barra de progreso)
                         const s = stateSteps[nuevoEstado];
                         document.getElementById('line-prog-' + idRuta).style.width = s.width;
-                        document.getElementById('prog-bar-' + idRuta).className = `w-full border-t-[3px] transition-colors duration-500 ${s.barColor}`;
                         
-                        // 3. Colorear los Nodos (Bolas)
+                        // 3. Colorear los Nodos (Bolitas pequeñas)
                         for (let i = 1; i <= 4; i++) {
                             const step = document.getElementById(`step-${i}-${idRuta}`);
-                            step.className = `w-8 h-8 rounded-full flex items-center justify-center border-[3px] border-white text-xs font-black transition-all duration-500 shadow-sm ${s.colors[i-1]}`;
+                            step.className = `w-2.5 h-2.5 rounded-full transition-all duration-700 ${s.colors[i-1]}`;
                         }
                         
-                        // 4. Actualizar Botón y Evento
+                        // 4. Actualizar Botón y Evento (Siempre Negro)
                         const nextConf = conf[nuevoEstado];
-                        btn.className = `w-full transition-all duration-300 active:scale-95 active:shadow-inner text-white font-black py-4 px-4 rounded-2xl shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-offset-2 ${nextConf.btnColor}`;
-                        btn.innerHTML = `<span class="tracking-wide text-lg uppercase">${nextConf.btnText}</span>`;
+                        btn.innerHTML = `<span class="tracking-wide text-sm">${nextConf.btnText}</span>`;
                         btn.onclick = (e) => { e.preventDefault(); avanzar(idRuta, nuevoEstado); };
                         btn.disabled = false;
                     }
                 } else {
-                    throw new Error("Respuesta no satisfactoria del servidor");
+                    throw new Error("Respuesta no satisfactoria");
                 }
             })
             .catch(err => {
-                alert("Hubo un problema de conexión. Inténtalo nuevamente.");
+                alert("Verifica tu conexión a internet.");
                 btn.disabled = false;
-                // Restaurar texto original al fallar
-                btn.innerHTML = `<span class="tracking-wide text-lg uppercase">${conf[estadoActual].btnText || 'INICIAR RUTA'}</span>`;
+                btn.innerHTML = `<span class="tracking-wide text-sm">${conf[estadoActual].btnText || 'Iniciar Ruta'}</span>`;
             });
         }
     </script>
