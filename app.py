@@ -373,6 +373,25 @@ def avanzar_estado(id_ruta, nuevo_estado):
         return jsonify({"success": True, "estado": nuevo_estado})
     return jsonify({"success": False, "error": "Sin conexión a base de datos"}), 500
 
+# --- API REST PARA ANDROID ---
+@app.route('/api/rutas', methods=['GET'])
+def api_rutas():
+    con = conectar_db()
+    if not con:
+        return jsonify({"success": False, "error": "Sin conexión a BD", "data": []}), 500
+    
+    rutas = []
+    cur = con.cursor()
+    cur.execute("SELECT id, fecha, chofer, vehiculo, origen, destino, centro_costos, descripcion, estado FROM bitacoras WHERE estado IN ('Pendiente', 'En Camino a Origen', 'Cargando', 'En Camino a Destino') ORDER BY id DESC")
+    for row in cur.fetchall():
+        rutas.append({
+            "id": row[0], "fecha": row[1], "chofer": row[2],
+            "vehiculo": row[3], "origen": row[4], "destino": row[5],
+            "cc": row[6], "descripcion": row[7], "estado": row[8]
+        })
+    con.close()
+    return jsonify({"success": True, "data": rutas})
+
 # --- INICIAR SERVIDOR ---
 if __name__ == '__main__':
     # host='0.0.0.0' permite que se acceda desde celulares en la red
